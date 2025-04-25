@@ -1,0 +1,24 @@
+{
+  "name": "mcp-server-runescape",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "stefan-xyz <24295554+stefan-xyz@users.noreply.github.com>",
+  "license": "Apache-2.0",
+  "type": "module",
+  "scripts": {
+    "dev": "node src/server.js",
+    "dev:debug": "npx @modelcontextprotocol/inspector node src/server.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.10.1",
+    "fuse.js": "^7.1.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.25.1",
+    "eslint": "^9.25.1",
+    "eslint-config-prettier": "^10.1.2",
+    "eslint-plugin-prettier": "^5.2.6",
+    "globals": "^16.0.0",
+    "prettier": "^3.5.3"
+  }
+}
