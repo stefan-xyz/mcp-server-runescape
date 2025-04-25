@@ -5,9 +5,17 @@ import {
   GET_ITEM_DETAIL_TOOL,
   GET_PLAYER_COUNT_TOOL,
   GET_PLAYER_HISCORES_TOOL,
+  GET_TOP_RANKINGS_TOOL,
   GET_RSUSER_TOTAL_TOOL,
 } from './tools/index.js';
-import { getItemDetails, getItemId, getPlayerHiscores, getPlayerCount, getRSUserTotal } from './actions/index.js';
+import {
+  getItemDetails,
+  getItemId,
+  getPlayerHiscores,
+  getTopRankings,
+  getPlayerCount,
+  getRSUserTotal,
+} from './actions/index.js';
 
 const server = new Server(
   {
@@ -23,7 +31,13 @@ const server = new Server(
 
 server.setRequestHandler(ListToolsRequestSchema, async () => {
   return {
-    tools: [GET_ITEM_DETAIL_TOOL, GET_PLAYER_HISCORES_TOOL, GET_PLAYER_COUNT_TOOL, GET_RSUSER_TOTAL_TOOL],
+    tools: [
+      GET_ITEM_DETAIL_TOOL,
+      GET_PLAYER_HISCORES_TOOL,
+      GET_TOP_RANKINGS_TOOL,
+      GET_PLAYER_COUNT_TOOL,
+      GET_RSUSER_TOTAL_TOOL,
+    ],
   };
 });
 
@@ -43,6 +57,14 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       case 'get_player_hiscores': {
         const { playerName, mode } = args;
         const data = await getPlayerHiscores(playerName, mode);
+
+        return {
+          content: [{ type: 'text', text: JSON.stringify(data) }],
+        };
+      }
+      case 'get_top_rankings': {
+        const { name, size } = args;
+        const data = await getTopRankings(name, size || 25);
 
         return {
           content: [{ type: 'text', text: JSON.stringify(data) }],

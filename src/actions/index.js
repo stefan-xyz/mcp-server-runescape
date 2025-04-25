@@ -1,4 +1,4 @@
-import { fuzzySearch, getModeSuffix } from '../utils/index.js';
+import { fuzzySearch, getModeSuffix, getSkillIndex, getActivityIndex } from '../utils/index.js';
 
 const API_BASE_URL = 'https://secure.runescape.com';
 const API_ITEMS_DUMP_BASE_URL = 'https://chisel.weirdgloop.org';
@@ -49,6 +49,31 @@ export const getPlayerHiscores = async (name, mode) => {
     return data;
   } catch (error) {
     console.error('Error fetching player hiscores:', error);
+    throw error;
+  }
+};
+
+export const getTopRankings = async (name, size = 25) => {
+  try {
+    const index = getSkillIndex(name);
+    const category = index !== -1 ? '0' : '1';
+
+    if (index === -1 && getActivityIndex(name) === -1) {
+      throw new Error(`Unknown skill or activity: ${name}`);
+    }
+
+    const response = await fetch(
+      `${API_BASE_URL}/m=hiscore_oldschool/ranking.json?table=${index !== -1 ? index : getActivityIndex(name)}&category=${category}&size=${size}`,
+    );
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch rankings: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching top rankings:', error);
     throw error;
   }
 };
