@@ -20,23 +20,23 @@ export const fuzzySearch = (
   return fuse.search(query);
 };
 
-const modeSuffixes = {
-  ironman: '_ironman',
-  hardcore_ironman: '_hardcore',
-  ultimate_ironman: '_ultimate',
-  deadman: '_deadman',
-  seasonal: '_seasonal',
-  tournament: '_tournament',
-  fresh_start: '_fresh_start',
-};
+const hiscoreTypes = [
+  'ironman',
+  'hardcore_ironman',
+  'ultimate_ironman',
+  'deadman',
+  'seasonal',
+  'tournament',
+  'fresh_start',
+];
 
 /**
- * Returns the suffix for the given RuneScape hiscores mode.
- * @param {string} mode - The player's mode (e.g., 'ironman', 'hardcore_ironman').
- * @returns {string} The mode suffix, or an empty string if the mode is not recognized.
+ * Returns the suffix for the given RuneScape hiscores type.
+ * @param {string} type - The player's type (e.g., 'ironman', 'hardcore_ironman').
+ * @returns {string} The type suffix, or an empty string if the type is not recognized.
  */
-export function getModeSuffix(mode) {
-  return modeSuffixes[mode] || '';
+export function getHiscoreType(type) {
+  return hiscoreTypes.includes(type) ? type : '';
 }
 
 const skillToIndex = {
@@ -170,3 +170,20 @@ const activityToIndex = {
 export function getActivityIndex(activity) {
   return activityToIndex[activity.toLowerCase()] ?? -1;
 }
+
+export const GameMode = {
+  OSRS: 'osrs',
+  RS: 'rs',
+};
+
+export const apiUrl = (mode, endpoint, gameMode) => {
+  const base = 'https://secure.runescape.com';
+  const modePrefix = gameMode === GameMode.OSRS ? `m=${mode}_oldschool` : `m=${mode}`;
+  return `${base}/${modePrefix}${endpoint}`;
+};
+
+export const apiItemsUrl = (gameMode) => {
+  const base = 'https://chisel.weirdgloop.org/gazproj/gazbot';
+  const modePrefix = gameMode === GameMode.OSRS ? 'os_dump.json' : 'rs_dump.json';
+  return `${base}/${modePrefix}`;
+};

@@ -1,11 +1,16 @@
-import { fuzzySearch, getModeSuffix, getSkillIndex, getActivityIndex } from '../utils/index.js';
+import {
+  fuzzySearch,
+  getHiscoreType,
+  getSkillIndex,
+  getActivityIndex,
+  apiUrl,
+  apiItemsUrl,
+  GameMode,
+} from '../utils/index.js';
 
-const API_BASE_URL = 'https://secure.runescape.com';
-const API_ITEMS_DUMP_BASE_URL = 'https://chisel.weirdgloop.org';
-
-export const getItemId = async (name) => {
+export const getItemId = async (name, gameMode) => {
   try {
-    const response = await fetch(`${API_ITEMS_DUMP_BASE_URL}/gazproj/gazbot/os_dump.json`);
+    const response = await fetch(apiItemsUrl(gameMode));
     const data = await response.json();
 
     // Convert the data into an array of { id, name } objects for fuzzy search
@@ -26,9 +31,12 @@ export const getItemId = async (name) => {
   }
 };
 
-export const getItemDetails = async (id) => {
+export const getItemDetails = async (id, gameMode) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/m=itemdb_oldschool/api/catalogue/detail.json?item=${id}`);
+    const endpoint =
+      gameMode === GameMode.RS ? `_rs/api/catalogue/detail.json?item=${id}` : `/api/catalogue/detail.json?item=${id}`;
+
+    const response = await fetch(apiUrl('itemdb', endpoint, gameMode));
     const data = await response.json();
 
     return data;
@@ -38,12 +46,12 @@ export const getItemDetails = async (id) => {
   }
 };
 
-export const getPlayerHiscores = async (name, mode) => {
+export const getPlayerHiscores = async (name, type, gameMode) => {
   try {
-    const suffix = getModeSuffix(mode);
-    const m = `hiscore_oldschool${suffix}`;
+    const hiscoreType = getHiscoreType(type);
+    const endpoint = hiscoreType ? `_${hiscoreType}/index_lite.json?player=${name}` : `/index_lite.json?player=${name}`;
 
-    const response = await fetch(`${API_BASE_URL}/m=${m}/index_lite.json?player=${name}`);
+    const response = await fetch(apiUrl('hiscore', endpoint, gameMode));
     const data = await response.json();
 
     return data;
@@ -53,24 +61,20 @@ export const getPlayerHiscores = async (name, mode) => {
   }
 };
 
-export const getTopRankings = async (name, size = 25) => {
+export const getTopRankings = async (name, size, gameMode) => {
   try {
-    const index = getSkillIndex(name);
-    const category = index !== -1 ? '0' : '1';
+    const skillIndex = getSkillIndex(name);
+    const activityIndex = getActivityIndex(name);
+    const category = skillIndex !== -1 ? '0' : '1';
+    const endpoint = `/ranking.json?table=${skillIndex !== -1 ? skillIndex : activityIndex}&category=${category}&size=${size}`;
 
-    if (index === -1 && getActivityIndex(name) === -1) {
+    if (skillIndex === -1 && getActivityIndex(name) === -1) {
       throw new Error(`Unknown skill or activity: ${name}`);
     }
 
-    const response = await fetch(
-      `${API_BASE_URL}/m=hiscore_oldschool/ranking.json?table=${index !== -1 ? index : getActivityIndex(name)}&category=${category}&size=${size}`,
-    );
-
-    if (!response.ok) {
-      throw new Error(`Failed to fetch rankings: ${response.statusText}`);
-    }
-
+    const response = await fetch(apiUrl('hiscore', endpoint, gameMode));
     const data = await response.json();
+
     return data;
   } catch (error) {
     console.error('Error fetching top rankings:', error);
@@ -94,7 +98,8 @@ export const getPlayerCount = async () => {
 
 export const getRSUserTotal = async () => {
   try {
-    const response = await fetch(`${API_BASE_URL}/m=account-creation-reports/rsusertotal.ws`);
+    const endpoint = '/rsusertotal.ws';
+    const response = await fetch(apiUrl('account-creation-reports', endpoint, GameMode.RS));
     const data = await response.json();
 
     return data;

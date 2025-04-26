@@ -46,25 +46,25 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
   try {
     switch (name) {
       case 'get_item_details': {
-        const { itemName } = args;
-        const id = await getItemId(itemName);
-        const data = await getItemDetails(id);
+        const { itemName, gameMode } = args;
+        const id = await getItemId(itemName, gameMode);
+        const data = await getItemDetails(id, gameMode);
 
         return {
           content: [{ type: 'text', text: JSON.stringify(data) }],
         };
       }
       case 'get_player_hiscores': {
-        const { playerName, mode } = args;
-        const data = await getPlayerHiscores(playerName, mode);
+        const { playerName, type, gameMode } = args;
+        const data = await getPlayerHiscores(playerName, type, gameMode);
 
         return {
           content: [{ type: 'text', text: JSON.stringify(data) }],
         };
       }
       case 'get_top_rankings': {
-        const { name, size } = args;
-        const data = await getTopRankings(name, size || 25);
+        const { name, size, gameMode } = args;
+        const data = await getTopRankings(name, size, gameMode);
 
         return {
           content: [{ type: 'text', text: JSON.stringify(data) }],

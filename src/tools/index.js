@@ -7,9 +7,15 @@ export const GET_ITEM_DETAIL_TOOL = {
     properties: {
       itemName: {
         type: 'string',
-        description: 'The id of the item you want to get the price for',
+        description: 'The name of the item you want to get the details for',
+      },
+      gameMode: {
+        type: 'string',
+        description: 'The mode of the game, this can be "osrs" or "rs". osrs = old school runescape, rs = runescape',
+        default: 'osrs',
       },
     },
+    required: ['itemName'],
   },
 };
 
@@ -24,12 +30,18 @@ export const GET_PLAYER_HISCORES_TOOL = {
         type: 'string',
         description: 'The name of the player.',
       },
-      mode: {
+      type: {
         type: 'string',
         description:
-          "The mode of the game, this can be 'ironman', 'hardcore_ironman' leave empty string '' if no mode is specified.",
+          "The mode of the game, this can be 'ironman', 'hardcore_ironman' leave empty if no mode is specified.",
+      },
+      gameMode: {
+        type: 'string',
+        description: 'The mode of the game, this can be "osrs" or "rs". osrs = old school runescape, rs = runescape',
+        default: 'osrs',
       },
     },
+    required: ['playerName'],
   },
 };
 
@@ -45,9 +57,16 @@ export const GET_TOP_RANKINGS_TOOL = {
       },
       size: {
         type: 'number',
-        description: 'The number of rankings to return, this can be 1-50, default is 25.',
+        description: 'The number of rankings to return, this can be max 50',
+        default: 25,
+      },
+      gameMode: {
+        type: 'string',
+        description: 'The mode of the game, this can be "osrs" or "rs". osrs = old school runescape, rs = runescape',
+        default: 'osrs',
       },
     },
+    required: ['name'],
   },
 };
 
