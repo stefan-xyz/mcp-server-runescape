@@ -1,16 +1,23 @@
 {
   "name": "mcp-server-runescape",
   "version": "1.0.0",
-  "main": "index.js",
-  "author": "stefan-xyz <24295554+stefan-xyz@users.noreply.github.com>",
+  "main": "dist/server.js",
+  "author": "stefan-xyz",
+  "keywords": [
+    "mcp",
+    "runescape",
+    "osrs"
+  ],
   "license": "Apache-2.0",
   "type": "module",
   "bin": {
-    "mcp-server-runescape": "./src/server.js"
+    "mcp-server-runescape": "./dist/server.js"
   },
   "scripts": {
-    "start": "node src/server.js",
-    "dev": "npx @modelcontextprotocol/inspector node src/server.js"
+    "start": "node dist/server.js",
+    "dev": "npx @modelcontextprotocol/inspector node src/server.js",
+    "build": "mkdir -p dist && cp -r src/* dist/",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.10.1",
@@ -24,5 +31,10 @@
     "eslint-plugin-prettier": "^5.2.6",
     "globals": "^16.0.0",
     "prettier": "^3.5.3"
-  }
+  },
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ]  
 }

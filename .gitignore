@@ -17,3 +17,6 @@ build/
 
 # Environment variables
 .env
+
+# Yarn logs
+yarn-error.log
