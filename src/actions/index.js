@@ -1,3 +1,5 @@
+import fetch from 'node-fetch';
+
 import {
   fuzzySearch,
   getHiscoreType,

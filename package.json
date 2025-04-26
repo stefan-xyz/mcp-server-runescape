@@ -6,12 +6,13 @@
   "license": "Apache-2.0",
   "type": "module",
   "scripts": {
-    "dev": "node src/server.js",
-    "dev:debug": "npx @modelcontextprotocol/inspector node src/server.js"
+    "start": "node src/server.js",
+    "dev": "npx @modelcontextprotocol/inspector node src/server.js"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.10.1",
-    "fuse.js": "^7.1.0"
+    "fuse.js": "^7.1.0",
+    "node-fetch": "^3.3.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.1",
