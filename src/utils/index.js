@@ -20,6 +20,34 @@ export const fuzzySearch = (
   return fuse.search(query);
 };
 
+export const formatValue = (value) => {
+  if (value >= 1000000000) return `${(value / 1000000000).toFixed(1)}b`;
+  if (value >= 1000000) return `${(value / 1000000).toFixed(1)}m`;
+  if (value >= 1000) return `${(value / 1000).toFixed(1)}k`;
+  return value.toString();
+};
+
+export const transformPriceData = (data) => {
+  // Transform the data
+  const transformedDaily = {};
+  const transformedAverage = {};
+
+  for (const [timestamp, value] of Object.entries(data.daily)) {
+    const date = new Date(parseInt(timestamp)).toLocaleDateString();
+    transformedDaily[date] = formatValue(value);
+  }
+
+  for (const [timestamp, value] of Object.entries(data.average)) {
+    const date = new Date(parseInt(timestamp)).toLocaleDateString();
+    transformedAverage[date] = formatValue(value);
+  }
+
+  return {
+    daily: transformedDaily,
+    average: transformedAverage,
+  };
+};
+
 const hiscoreTypes = [
   'ironman',
   'hardcore_ironman',

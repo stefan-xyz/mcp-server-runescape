@@ -19,6 +19,27 @@ export const GET_ITEM_DETAIL_TOOL = {
   },
 };
 
+export const GET_ITEM_PRICE_HISTORY_TOOL = {
+  name: 'get_item_price_history',
+  description:
+    'Returns the prices each day of a given item for the previous 180 days. This is useful for seeing the price trends of an item over time.',
+  inputSchema: {
+    type: 'object',
+    properties: {
+      itemName: {
+        type: 'string',
+        description: 'The name of the item you want to get the graph for',
+      },
+      gameMode: {
+        type: 'string',
+        description: 'The mode of the game, this can be "osrs" or "rs". osrs = old school runescape, rs = runescape',
+        default: 'osrs',
+      },
+    },
+    required: ['itemName'],
+  },
+};
+
 export const GET_PLAYER_HISCORES_TOOL = {
   name: 'get_player_hiscores',
   description:

@@ -6,6 +6,7 @@ import {
   apiUrl,
   apiItemsUrl,
   GameMode,
+  transformPriceData,
 } from '../utils/index.js';
 
 export const getItemId = async (name, gameMode) => {
@@ -39,10 +40,42 @@ export const getItemDetails = async (id, gameMode) => {
     const response = await fetch(apiUrl('itemdb', endpoint, gameMode));
     const data = await response.json();
 
-    return data;
+    return {
+      content: [{ type: 'text', text: JSON.stringify(data) }],
+    };
   } catch (error) {
-    console.error('Error fetching item details:', error);
-    throw error;
+    return {
+      isError: true,
+      content: [
+        {
+          type: 'text',
+          text: `Error: ${error.message}`,
+        },
+      ],
+    };
+  }
+};
+
+export const getItemPriceHistory = async (id, gameMode) => {
+  try {
+    const endpoint = gameMode === GameMode.RS ? `_rs/api/graph/${id}.json` : `/api/graph/${id}.json`;
+
+    const response = await fetch(apiUrl('itemdb', endpoint, gameMode));
+    const data = await response.json();
+
+    return {
+      content: [{ type: 'text', text: JSON.stringify(transformPriceData(data)) }],
+    };
+  } catch (error) {
+    return {
+      isError: true,
+      content: [
+        {
+          type: 'text',
+          text: `Error: ${error.message}`,
+        },
+      ],
+    };
   }
 };
 
@@ -54,10 +87,19 @@ export const getPlayerHiscores = async (name, type, gameMode) => {
     const response = await fetch(apiUrl('hiscore', endpoint, gameMode));
     const data = await response.json();
 
-    return data;
+    return {
+      content: [{ type: 'text', text: JSON.stringify(data) }],
+    };
   } catch (error) {
-    console.error('Error fetching player hiscores:', error);
-    throw error;
+    return {
+      isError: true,
+      content: [
+        {
+          type: 'text',
+          text: `Error: ${error.message}`,
+        },
+      ],
+    };
   }
 };
 
@@ -75,10 +117,19 @@ export const getTopRankings = async (name, size, gameMode) => {
     const response = await fetch(apiUrl('hiscore', endpoint, gameMode));
     const data = await response.json();
 
-    return data;
+    return {
+      content: [{ type: 'text', text: JSON.stringify(data) }],
+    };
   } catch (error) {
-    console.error('Error fetching top rankings:', error);
-    throw error;
+    return {
+      isError: true,
+      content: [
+        {
+          type: 'text',
+          text: `Error: ${error.message}`,
+        },
+      ],
+    };
   }
 };
 
@@ -89,10 +140,19 @@ export const getPlayerCount = async () => {
     );
     const data = await response.text();
 
-    return data;
+    return {
+      content: [{ type: 'text', text: JSON.stringify(data) }],
+    };
   } catch (error) {
-    console.error('Error fetching player count:', error);
-    throw error;
+    return {
+      isError: true,
+      content: [
+        {
+          type: 'text',
+          text: `Error: ${error.message}`,
+        },
+      ],
+    };
   }
 };
 
@@ -102,9 +162,18 @@ export const getRSUserTotal = async () => {
     const response = await fetch(apiUrl('account-creation-reports', endpoint, GameMode.RS));
     const data = await response.json();
 
-    return data;
+    return {
+      content: [{ type: 'text', text: JSON.stringify(data) }],
+    };
   } catch (error) {
-    console.error('Error fetching RS user total:', error);
-    throw error;
+    return {
+      isError: true,
+      content: [
+        {
+          type: 'text',
+          text: `Error: ${error.message}`,
+        },
+      ],
+    };
   }
 };

@@ -1,8 +1,9 @@
 import { Server } from '@modelcontextprotocol/sdk/server/index.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
-import { CallToolRequestSchema, ListToolsRequestSchema } from '@modelcontextprotocol/sdk/types.js';
+import { CallToolRequestSchema, ListToolsRequestSchema, McpError, ErrorCode } from '@modelcontextprotocol/sdk/types.js';
 import {
   GET_ITEM_DETAIL_TOOL,
+  GET_ITEM_PRICE_HISTORY_TOOL,
   GET_PLAYER_COUNT_TOOL,
   GET_PLAYER_HISCORES_TOOL,
   GET_TOP_RANKINGS_TOOL,
@@ -15,6 +16,7 @@ import {
   getTopRankings,
   getPlayerCount,
   getRSUserTotal,
+  getItemPriceHistory,
 } from './actions/index.js';
 
 const server = new Server(
@@ -33,6 +35,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
   return {
     tools: [
       GET_ITEM_DETAIL_TOOL,
+      GET_ITEM_PRICE_HISTORY_TOOL,
       GET_PLAYER_HISCORES_TOOL,
       GET_TOP_RANKINGS_TOOL,
       GET_PLAYER_COUNT_TOOL,
@@ -48,51 +51,44 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       case 'get_item_details': {
         const { itemName, gameMode } = args;
         const id = await getItemId(itemName, gameMode);
-        const data = await getItemDetails(id, gameMode);
 
-        return {
-          content: [{ type: 'text', text: JSON.stringify(data) }],
-        };
+        return getItemDetails(id, gameMode);
+      }
+      case 'get_item_price_history': {
+        const { itemName, gameMode } = args;
+        const id = await getItemId(itemName, gameMode);
+
+        return getItemPriceHistory(id, gameMode);
       }
       case 'get_player_hiscores': {
         const { playerName, type, gameMode } = args;
-        const data = await getPlayerHiscores(playerName, type, gameMode);
 
-        return {
-          content: [{ type: 'text', text: JSON.stringify(data) }],
-        };
+        return getPlayerHiscores(playerName, type, gameMode);
       }
       case 'get_top_rankings': {
         const { name, size, gameMode } = args;
-        const data = await getTopRankings(name, size, gameMode);
 
-        return {
-          content: [{ type: 'text', text: JSON.stringify(data) }],
-        };
+        return getTopRankings(name, size, gameMode);
       }
       case 'get_player_count': {
-        const data = await getPlayerCount();
-
-        return {
-          content: [{ type: 'text', text: JSON.stringify(data) }],
-        };
+        return getPlayerCount();
       }
       case 'get_rsuser_total': {
-        const data = await getRSUserTotal();
-
-        return {
-          content: [{ type: 'text', text: JSON.stringify(data) }],
-        };
+        return getRSUserTotal();
       }
       default:
-        throw new Error(`Unknown tool: ${name}`);
+        throw new McpError(ErrorCode.MethodNotFound, `Unknown tool: ${request.params.name}`);
     }
   } catch (error) {
-    if (error) {
-      throw new Error(`Error: ${error.status} ${JSON.stringify(error.body) || error.message || '(unknown error)'}`);
-    }
-
-    throw error;
+    return {
+      content: [
+        {
+          type: 'text',
+          text: `Error: ${error instanceof Error ? error.message : String(error)}`,
+        },
+      ],
+      isError: true,
+    };
   }
 });
 
