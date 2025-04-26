@@ -9,6 +9,12 @@ import {
   transformPriceData,
 } from '../utils/index.js';
 
+/**
+ * Returns the ID of the item matching the given name.
+ * @param {string} name - The name of the item to search for.
+ * @param {string} gameMode - The game mode (e.g., 'osrs', 'rs').
+ * @returns {Promise<string>} The ID of the item.
+ */
 export const getItemId = async (name, gameMode) => {
   try {
     const response = await fetch(apiItemsUrl(gameMode));
@@ -32,6 +38,12 @@ export const getItemId = async (name, gameMode) => {
   }
 };
 
+/**
+ * Returns the details of the item matching the given ID.
+ * @param {string} id - The ID of the item to get details for.
+ * @param {string} gameMode - The game mode (e.g., 'osrs', 'rs').
+ * @returns {Promise<Object>} The details of the item.
+ */
 export const getItemDetails = async (id, gameMode) => {
   try {
     const endpoint =
@@ -56,6 +68,13 @@ export const getItemDetails = async (id, gameMode) => {
   }
 };
 
+/**
+ * Returns the price history of the item matching the given ID.
+ * 180 days of price history is available.
+ * @param {string} id - The ID of the item to get price history for.
+ * @param {string} gameMode - The game mode (e.g., 'osrs', 'rs').
+ * @returns {Promise<Object>} The price history of the item.
+ */
 export const getItemPriceHistory = async (id, gameMode) => {
   try {
     const endpoint = gameMode === GameMode.RS ? `_rs/api/graph/${id}.json` : `/api/graph/${id}.json`;
@@ -79,6 +98,13 @@ export const getItemPriceHistory = async (id, gameMode) => {
   }
 };
 
+/**
+ * Returns the hiscores of the player matching the given name and type.
+ * @param {string} name - The name of the player to get hiscores for.
+ * @param {string} type - The type of hiscores to get (e.g., 'ironman', 'hardcore_ironman').
+ * @param {string} gameMode - The game mode (e.g., 'osrs', 'rs').
+ * @returns {Promise<Object>} The hiscores of the player.
+ */
 export const getPlayerHiscores = async (name, type, gameMode) => {
   try {
     const hiscoreType = getHiscoreType(type);
@@ -103,6 +129,13 @@ export const getPlayerHiscores = async (name, type, gameMode) => {
   }
 };
 
+/**
+ * Returns the top rankings of the skill or activity matching the given name.
+ * @param {string} name - The name of the skill or activity to get top rankings for.
+ * @param {number} size - The number of rankings to get.
+ * @param {string} gameMode - The game mode (e.g., 'osrs', 'rs').
+ * @returns {Promise<Object>} The top rankings of the skill or activity.
+ */
 export const getTopRankings = async (name, size, gameMode) => {
   try {
     const skillIndex = getSkillIndex(name);
@@ -133,6 +166,10 @@ export const getTopRankings = async (name, size, gameMode) => {
   }
 };
 
+/**
+ * Returns the current player count of the RuneScape server.
+ * @returns {Promise<Object>} The current player count of the RuneScape server.
+ */
 export const getPlayerCount = async () => {
   try {
     const response = await fetch(
@@ -156,6 +193,10 @@ export const getPlayerCount = async () => {
   }
 };
 
+/**
+ * Returns the total number of RS accounts created.
+ * @returns {Promise<Object>} The total number of RS users.
+ */
 export const getRSUserTotal = async () => {
   try {
     const endpoint = '/rsusertotal.ws';

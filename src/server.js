@@ -19,6 +19,9 @@ import {
   getItemPriceHistory,
 } from './actions/index.js';
 
+/**
+ * The server instance.
+ */
 const server = new Server(
   {
     name: 'mcp-server-runescape',
@@ -31,6 +34,11 @@ const server = new Server(
   },
 );
 
+/**
+ * Handles the list of tools request.
+ * @param {ListToolsRequestSchema} request - The list of tools request.
+ * @returns {Promise<Object>} The list of tools.
+ */
 server.setRequestHandler(ListToolsRequestSchema, async () => {
   return {
     tools: [
@@ -44,6 +52,11 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
   };
 });
 
+/**
+ * Handles the call tool request.
+ * @param {CallToolRequestSchema} request - The call tool request.
+ * @returns {Promise<Object>} The call tool response.
+ */
 server.setRequestHandler(CallToolRequestSchema, async (request) => {
   const { name, arguments: args } = request.params;
   try {

@@ -20,6 +20,11 @@ export const fuzzySearch = (
   return fuse.search(query);
 };
 
+/**
+ * Formats a value to a string with a suffix for thousands, millions, and billions.
+ * @param {number} value - The value to format.
+ * @returns {string} The formatted value.
+ */
 export const formatValue = (value) => {
   if (value >= 1000000000) return `${(value / 1000000000).toFixed(1)}b`;
   if (value >= 1000000) return `${(value / 1000000).toFixed(1)}m`;
@@ -27,6 +32,11 @@ export const formatValue = (value) => {
   return value.toString();
 };
 
+/**
+ * Transforms price data from a daily and average format to a date-value format.
+ * @param {Object} data - The price data to transform.
+ * @returns {Object} The transformed price data.
+ */
 export const transformPriceData = (data) => {
   // Transform the data
   const transformedDaily = {};
@@ -48,6 +58,9 @@ export const transformPriceData = (data) => {
   };
 };
 
+/**
+ * The list of hiscores types.
+ */
 const hiscoreTypes = [
   'ironman',
   'hardcore_ironman',
@@ -67,6 +80,9 @@ export function getHiscoreType(type) {
   return hiscoreTypes.includes(type) ? type : '';
 }
 
+/**
+ * The list of skills in RuneScape.
+ */
 const skillToIndex = {
   overall: 0,
   attack: 1,
@@ -103,6 +119,9 @@ export function getSkillIndex(skill) {
   return skillToIndex[skill.toLowerCase()] ?? -1;
 }
 
+/**
+ * The list of hiscores activities in RuneScape.
+ */
 const activityToIndex = {
   'league points': 0,
   'deadman points': 1,
@@ -199,17 +218,32 @@ export function getActivityIndex(activity) {
   return activityToIndex[activity.toLowerCase()] ?? -1;
 }
 
+/**
+ * The list of game modes in RuneScape.
+ */
 export const GameMode = {
   OSRS: 'osrs',
   RS: 'rs',
 };
 
+/**
+ * Returns the API URL for the given mode and endpoint.
+ * @param {string} mode - The mode (e.g., 'itemdb', 'hiscore').
+ * @param {string} endpoint - The endpoint (e.g., '/api/catalogue/detail.json?item=1').
+ * @param {string} gameMode - The game mode (e.g., 'osrs', 'rs').
+ * @returns {string} The API URL.
+ */
 export const apiUrl = (mode, endpoint, gameMode) => {
   const base = 'https://secure.runescape.com';
   const modePrefix = gameMode === GameMode.OSRS ? `m=${mode}_oldschool` : `m=${mode}`;
   return `${base}/${modePrefix}${endpoint}`;
 };
 
+/**
+ * Returns the API URL for the items in RuneScape.
+ * @param {string} gameMode - The game mode (e.g., 'osrs', 'rs').
+ * @returns {string} The API URL.
+ */
 export const apiItemsUrl = (gameMode) => {
   const base = 'https://chisel.weirdgloop.org/gazproj/gazbot';
   const modePrefix = gameMode === GameMode.OSRS ? 'os_dump.json' : 'rs_dump.json';

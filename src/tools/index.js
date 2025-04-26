@@ -1,3 +1,6 @@
+/**
+ * The get item details tool.
+ */
 export const GET_ITEM_DETAIL_TOOL = {
   name: 'get_item_details',
   description:
@@ -19,6 +22,9 @@ export const GET_ITEM_DETAIL_TOOL = {
   },
 };
 
+/**
+ * The get item price history tool.
+ */
 export const GET_ITEM_PRICE_HISTORY_TOOL = {
   name: 'get_item_price_history',
   description:
@@ -40,6 +46,9 @@ export const GET_ITEM_PRICE_HISTORY_TOOL = {
   },
 };
 
+/**
+ * The get player hiscores tool.
+ */
 export const GET_PLAYER_HISCORES_TOOL = {
   name: 'get_player_hiscores',
   description:
@@ -66,6 +75,9 @@ export const GET_PLAYER_HISCORES_TOOL = {
   },
 };
 
+/**
+ * The get top rankings tool.
+ */
 export const GET_TOP_RANKINGS_TOOL = {
   name: 'get_top_rankings',
   description: 'Returns the top rankings (max 50) for a given skill or activity.',
@@ -91,6 +103,9 @@ export const GET_TOP_RANKINGS_TOOL = {
   },
 };
 
+/**
+ * The get player count tool.
+ */
 export const GET_PLAYER_COUNT_TOOL = {
   name: 'get_player_count',
   description: 'Returns the number of players currently online in RuneScape and Old School RuneScape.',
@@ -99,6 +114,9 @@ export const GET_PLAYER_COUNT_TOOL = {
   },
 };
 
+/**
+ * The get rsuser total tool (accounts created).
+ */
 export const GET_RSUSER_TOTAL_TOOL = {
   name: 'get_rsuser_total',
   description:
