@@ -5,6 +5,9 @@
   "author": "stefan-xyz <24295554+stefan-xyz@users.noreply.github.com>",
   "license": "Apache-2.0",
   "type": "module",
+  "bin": {
+    "mcp-server-runescape": "./src/server.js"
+  },
   "scripts": {
     "start": "node src/server.js",
     "dev": "npx @modelcontextprotocol/inspector node src/server.js"
