@@ -75,7 +75,7 @@ export function getHiscoreType(type) {
 /**
  * The list of skills in RuneScape.
  */
-const skillToIndex = {
+export const skillToIndex = {
   overall: 0,
   attack: 1,
   defence: 2,
@@ -114,7 +114,7 @@ export function getSkillIndex(skill) {
 /**
  * The list of hiscores activities in RuneScape.
  */
-const activityToIndex = {
+export const activityToIndex = {
   'league points': 0,
   'deadman points': 1,
   'bounty hunter - hunter': 2,

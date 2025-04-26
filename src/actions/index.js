@@ -9,6 +9,8 @@ import {
   apiItemsUrl,
   GameMode,
   transformPriceData,
+  skillToIndex,
+  activityToIndex,
 } from '../utils/index.js';
 
 /**
@@ -140,14 +142,25 @@ export const getPlayerHiscores = async (name, type, gameMode) => {
  */
 export const getTopRankings = async (name, size, gameMode) => {
   try {
-    const skillIndex = getSkillIndex(name);
-    const activityIndex = getActivityIndex(name);
-    const category = skillIndex !== -1 ? '0' : '1';
-    const endpoint = `/ranking.json?table=${skillIndex !== -1 ? skillIndex : activityIndex}&category=${category}&size=${size}`;
+    const skills = Object.keys(skillToIndex);
+    const activities = Object.keys(activityToIndex);
+    const allNames = [...skills, ...activities];
 
-    if (skillIndex === -1 && getActivityIndex(name) === -1) {
+    // Perform fuzzy search to find the closest match
+    const searchResults = fuzzySearch(allNames, name, {
+      includeScore: true,
+      threshold: 0.3,
+    });
+
+    if (searchResults.length === 0) {
       throw new Error(`Unknown skill or activity: ${name}`);
     }
+
+    const bestMatch = searchResults[0].item;
+    const skillIndex = getSkillIndex(bestMatch);
+    const activityIndex = getActivityIndex(bestMatch);
+    const category = skillIndex !== -1 ? '0' : '1';
+    const endpoint = `/ranking.json?table=${skillIndex !== -1 ? skillIndex : activityIndex}&category=${category}&size=${size}`;
 
     const response = await fetch(apiUrl('hiscore', endpoint, gameMode));
     const data = await response.json();
