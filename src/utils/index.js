@@ -61,15 +61,7 @@ export const transformPriceData = (data) => {
 /**
  * The list of hiscores types.
  */
-const hiscoreTypes = [
-  'ironman',
-  'hardcore_ironman',
-  'ultimate_ironman',
-  'deadman',
-  'seasonal',
-  'tournament',
-  'fresh_start',
-];
+const hiscoreTypes = ['ironman', 'hardcore_ironman', 'ultimate', 'deadman', 'seasonal', 'tournament', 'fresh_start'];
 
 /**
  * Returns the suffix for the given RuneScape hiscores type.
