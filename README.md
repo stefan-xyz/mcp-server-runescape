@@ -1,6 +1,6 @@
 # mcp-server-runescape
 
-This is a MCP server with tools for interacting with RuneScape (RS) and Old School RuneScape (OSRS) data, including item prices, player hiscores, and more.
+This is an MCP server with tools for interacting with RuneScape (RS) and Old School RuneScape (OSRS) data, including item prices, player hiscores, and more.
 
 [Introduction to MCP servers](https://modelcontextprotocol.io/introduction)
 
@@ -153,6 +153,8 @@ You can find the config file in (mac):
 
 ### 2. From Source
 
+**Required** [Node.js](https://nodejs.org/en) installed on your system
+
 1. Clone this repository
 2. Install dependencies:
    ```bash   
@@ -177,10 +179,14 @@ You can find the config file in (mac):
    ```bash
    yarn dev
    ```
+   or
+   ```bash   
+   npm run build
+   ```
 
 Make sure to:
 
-- Replace `/path/to/mcp-server-runescape` with the actual path to your installation
+- Replace `/path/to/mcp-server-runescape` with the actual path to your installation.
 
 After updating the configuration, restart Claude desktop or Cursor for the changes to take effect.
 
@@ -194,3 +200,5 @@ You can use any client you want, my personal preference goes to Cursor at the mo
 
 For detailed information about the Runescape API endpoints used by this MCP server, visit:
 [RS/Wiki API](https://runescape.wiki/w/Application_programming_interface)
+
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://buymeacoffee.com/stefanxyz)
