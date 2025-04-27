@@ -155,7 +155,11 @@ You can find the config file in (mac):
 
 1. Clone this repository
 2. Install dependencies:
-   ```bash
+   ```bash   
+   yarn
+   ```
+   or
+   ```bash   
    npm install
    ```
 3. Then update your Claude desktop or Cursor with:
