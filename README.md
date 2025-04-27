@@ -1,4 +1,5 @@
 # mcp-server-runescape
+[![npm version](https://badge.fury.io/js/mcp-server-runescape.svg)](https://badge.fury.io/js/mcp-server-runescape)
 
 This is an MCP server with tools for interacting with RuneScape (RS) and Old School RuneScape (OSRS) data, including item prices, player hiscores, and more.
 
