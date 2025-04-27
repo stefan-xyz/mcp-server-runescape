@@ -169,12 +169,16 @@ You can find the config file in (mac):
      }
    }
    ```
+4. **Optional**: Run the debugger/inspector
+   ```bash
+   yarn dev
+   ```
 
 Make sure to:
 
 - Replace `/path/to/mcp-server-runescape` with the actual path to your installation
 
-After updating the configuration, restart Claude Desktop or Cursor for the changes to take effect.
+After updating the configuration, restart Claude desktop or Cursor for the changes to take effect.
 
 ### Personal preference
 
