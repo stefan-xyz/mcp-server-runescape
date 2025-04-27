@@ -5,8 +5,10 @@
   "author": "stefan-xyz",
   "keywords": [
     "mcp",
+    "rs",
+    "osrs",
     "runescape",
-    "osrs"
+    "old school"
   ],
   "license": "Apache-2.0",
   "type": "module",

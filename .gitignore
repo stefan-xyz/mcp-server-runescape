@@ -20,3 +20,6 @@ build/
 
 # Yarn logs
 yarn-error.log
+
+# Todo list
+todo.txt
