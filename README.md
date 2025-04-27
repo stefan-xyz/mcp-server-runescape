@@ -1,5 +1,6 @@
 # mcp-server-runescape
 [![npm version](https://badge.fury.io/js/mcp-server-runescape.svg)](https://badge.fury.io/js/mcp-server-runescape)
+[![smithery badge](https://smithery.ai/badge/@stefan-xyz/mcp-server-runescape)](https://smithery.ai/server/@stefan-xyz/mcp-server-runescape)
 
 This is an MCP server with tools for interacting with RuneScape (RS) and Old School RuneScape (OSRS) data, including item prices, player hiscores, and more.
 
@@ -126,6 +127,14 @@ You can use the MCP server in many clients, for example:
 
 - Claude desktop
 - Cursor
+
+### Installing via Smithery
+
+To install mcp-server-runescape for Claude Desktop automatically via [Smithery](https://smithery.ai/server/@stefan-xyz/mcp-server-runescape):
+
+```bash
+npx -y @smithery/cli install @stefan-xyz/mcp-server-runescape --client claude
+```
 
 ### 1. Add the MCP server in your config (NPM Package)
 
