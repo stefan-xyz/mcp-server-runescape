@@ -103,13 +103,13 @@ export const getItemPriceHistory = async (id, gameMode) => {
 };
 
 /**
- * Returns the hiscores of the player matching the given name and type.
- * @param {string} name - The name of the player to get hiscores for.
- * @param {string} type - The type of hiscores to get (e.g., 'ironman', 'hardcore_ironman').
+ * Returns the hiscore of the player matching the given name and type.
+ * @param {string} name - The name of the player to get hiscore for.
+ * @param {string} type - The type of hiscore to get (e.g., 'ironman', 'hardcore_ironman').
  * @param {string} gameMode - The game mode (e.g., 'osrs', 'rs').
- * @returns {Promise<Object>} The hiscores of the player.
+ * @returns {Promise<Object>} The hiscore of the player.
  */
-export const getPlayerHiscores = async (name, type, gameMode) => {
+export const getPlayerHiscore = async (name, type, gameMode) => {
   try {
     const hiscoreType = getHiscoreType(type);
     const endpoint = hiscoreType ? `_${hiscoreType}/index_lite.json?player=${name}` : `/index_lite.json?player=${name}`;

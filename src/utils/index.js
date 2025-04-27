@@ -59,12 +59,12 @@ export const transformPriceData = (data) => {
 };
 
 /**
- * The list of hiscores types.
+ * The list of hiscore types.
  */
 const hiscoreTypes = ['ironman', 'hardcore_ironman', 'ultimate', 'deadman', 'seasonal', 'tournament', 'fresh_start'];
 
 /**
- * Returns the suffix for the given RuneScape hiscores type.
+ * Returns the suffix for the given RuneScape hiscore type.
  * @param {string} type - The player's type (e.g., 'ironman', 'hardcore_ironman').
  * @returns {string} The type suffix, or an empty string if the type is not recognized.
  */
@@ -103,7 +103,7 @@ export const skillToIndex = {
 };
 
 /**
- * Returns the index for the given RuneScape hiscores skill.
+ * Returns the index for the given RuneScape hiscore skill.
  * @param {string} skill - The skill name (e.g., 'Woodcutting', 'Attack').
  * @returns {number} The skill index, or -1 if the skill is not recognized.
  */
@@ -112,7 +112,7 @@ export function getSkillIndex(skill) {
 }
 
 /**
- * The list of hiscores activities in RuneScape.
+ * The list of hiscore activities in RuneScape.
  */
 export const activityToIndex = {
   'league points': 0,
@@ -202,7 +202,7 @@ export const activityToIndex = {
 };
 
 /**
- * Returns the index for the given RuneScape hiscores activity.
+ * Returns the index for the given RuneScape hiscore activity.
  * @param {string} activity - The activity name (e.g., 'Clue Scrolls (all)', 'Vorkath').
  * @returns {number} The activity index, or -1 if the activity is not recognized.
  */

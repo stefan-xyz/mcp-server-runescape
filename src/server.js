@@ -5,14 +5,14 @@ import {
   GET_ITEM_DETAIL_TOOL,
   GET_ITEM_PRICE_HISTORY_TOOL,
   GET_PLAYER_COUNT_TOOL,
-  GET_PLAYER_HISCORES_TOOL,
+  GET_PLAYER_HISCORE_TOOL,
   GET_TOP_RANKINGS_TOOL,
   GET_RSUSER_TOTAL_TOOL,
 } from './tools/index.js';
 import {
   getItemDetails,
   getItemId,
-  getPlayerHiscores,
+  getPlayerHiscore,
   getTopRankings,
   getPlayerCount,
   getRSUserTotal,
@@ -44,7 +44,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
     tools: [
       GET_ITEM_DETAIL_TOOL,
       GET_ITEM_PRICE_HISTORY_TOOL,
-      GET_PLAYER_HISCORES_TOOL,
+      GET_PLAYER_HISCORE_TOOL,
       GET_TOP_RANKINGS_TOOL,
       GET_PLAYER_COUNT_TOOL,
       GET_RSUSER_TOTAL_TOOL,
@@ -65,7 +65,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         const { itemName, gameMode } = args;
         const id = await getItemId(itemName, gameMode);
 
-        return getItemDetails(id, gameMode);
+        return getItemDetails(id, gameMode || 'osrs');
       }
       case 'get_item_price_history': {
         const { itemName, gameMode } = args;
@@ -73,10 +73,10 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 
         return getItemPriceHistory(id, gameMode);
       }
-      case 'get_player_hiscores': {
+      case 'get_player_hiscore': {
         const { playerName, type, gameMode } = args;
 
-        return getPlayerHiscores(playerName, type, gameMode);
+        return getPlayerHiscore(playerName, type, gameMode);
       }
       case 'get_top_rankings': {
         const { name, size, gameMode } = args;
