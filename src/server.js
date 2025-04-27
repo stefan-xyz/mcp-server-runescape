@@ -65,7 +65,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         const { itemName, gameMode } = args;
         const id = await getItemId(itemName, gameMode);
 
-        return getItemDetails(id, gameMode || 'osrs');
+        return getItemDetails(id, gameMode);
       }
       case 'get_item_price_history': {
         const { itemName, gameMode } = args;
