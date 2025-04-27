@@ -69,7 +69,7 @@ Gets the current amount of accounts created that can access any form of RuneScap
 
 https://runescape.wiki/w/Application_programming_interface#rsusertotal
 
-### Note
+#### Note
 
 For consistency I tried to only use API endpoints which support both RS and OSRS data.
 
@@ -190,7 +190,7 @@ Make sure to:
 
 After updating the configuration, restart Claude desktop or Cursor for the changes to take effect.
 
-### Personal preference
+#### Personal preference
 
 You can use any client you want, my personal preference goes to Cursor at the moment in combination with deepseek-v3.1 which is performing really well.
 
@@ -200,5 +200,13 @@ You can use any client you want, my personal preference goes to Cursor at the mo
 
 For detailed information about the Runescape API endpoints used by this MCP server, visit:
 [RS/Wiki API](https://runescape.wiki/w/Application_programming_interface)
+
+## Thank you
+
+I built this over the weekend, to learn a bit more about MCP servers. Runescape was the perfect subject to try it out on.
+
+- Shout out to the rs/wiki team for the docs and API.
+
+If this helps you out in anyway when scaping and you would like to support me, feel free to buy me a flat white :)
 
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://buymeacoffee.com/stefanxyz)
