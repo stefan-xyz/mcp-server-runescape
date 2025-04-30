@@ -4,7 +4,7 @@
 
 This is an MCP server with tools for interacting with RuneScape (RS) and Old School RuneScape (OSRS) data, including item prices, player hiscores, and more.
 
-[Introduction to MCP servers](https://modelcontextprotocol.io/introduction)
+https://github.com/user-attachments/assets/7c141575-443b-4b76-8b33-6d48ec82fbe7
 
 ## Features
 
@@ -123,6 +123,8 @@ Here are some example queries you can ask the AI when using this MCP server:
 
 ## Getting Started
 
+[Introduction to MCP servers](https://modelcontextprotocol.io/introduction)
+
 You can use the MCP server in many clients, for example:
 
 - Claude desktop
@@ -209,6 +211,6 @@ I built this over the weekend, to learn a bit more about MCP servers. Runescape 
 
 - Shout out to the rs/wiki team for the docs and API.
 
-If this helps you out in anyway when scaping and you would like to support me, feel free to buy me a flat white :)
+If this helps you out in anyway when scaping and you would like to support me, feel free to
 
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://buymeacoffee.com/stefanxyz)
