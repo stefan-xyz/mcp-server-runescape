@@ -130,6 +130,14 @@ You can use the MCP server in many clients, for example:
 - Claude desktop
 - Cursor
 
+### Installing via Smithery
+
+To install mcp-server-runescape for Claude Desktop automatically via [Smithery](https://smithery.ai/server/@stefan-xyz/mcp-server-runescape):
+
+```bash
+npx -y @smithery/cli install @stefan-xyz/mcp-server-runescape --client claude
+```
+
 ### 1. Add the MCP server in your config (NPM Package)
 
 Paste this snippet in your mcp config that your client is using
